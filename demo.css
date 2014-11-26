@@ -59,3 +59,16 @@ select {
   display: inline-block;
   margin:10px;
 }
+
+#footer {
+  margin:40px;
+}
+
+#footer > a {
+  display: inline-block;
+  text-decoration: none;
+  color: #FFF;
+  background: #036;
+  padding: 25px;
+  font-size: 20px;
+}
