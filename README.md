@@ -49,42 +49,46 @@ SVG should have the following structure to be a valid icon set:
 
 ## Options
 
+### SVGMorpheus()
+
 ```javascript
 var myIcons = SVGMorpheus(DOM, iconId, duration, easing);
 
 ```
 
-### DOM
+#### DOM
 
 Object/IFrame/SVG element containing an iconset. Can be a DOM element or element id.
 
-### iconId
+#### iconId
 
 *Optional*. Id of an icon shown after initialization. Default: last icon in the icon set.
 
-### duration
+#### duration
 
 *Optional*. Set a default duration for transitions, in msec. Default: 1000.
 
-### easing
+#### easing
 
 *Optional*. Set a default easing for transitions. Default: linear.
 
+
+### to()
 
 ```javascript
 var myIcons.to(iconId, duration, easing);
 
 ```
 
-### iconId
+#### iconId
 
 Id of an icon to transition to.
 
-### duration
+#### duration
 
 *Optional*. Set a duration for the transition, in msec.
 
-### easing
+#### easing
 
 *Optional*. Set an easing for the transition.
 
