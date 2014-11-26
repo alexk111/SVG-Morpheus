@@ -1,0 +1,36 @@
+{
+  "author": {
+    "name": "Alex Kaul",
+    "email": "alexkaul@googlemail.com"
+  },
+  "name": "svg-morpheus",
+  "prettyName": "SVG Morpheus",
+  "version": "0.1.0",
+  "description": "SVG Morpheus",
+  "homepage": "https://github.com/alexk111/SVG-Morpheus",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexk111/SVG-Morpheus.git"
+  },
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "connect-livereload": "^0.4.0",
+    "express": "^4.4.5",
+    "gulp": "^3.8.5",
+    "gulp-autoprefixer": "0.0.8",
+    "gulp-concat": "^2.2.0",
+    "gulp-concat-util": "^0.2.3",
+    "gulp-header": "^1.0.2",
+    "gulp-jshint": "^1.6.4",
+    "gulp-livereload": "^2.1.0",
+    "gulp-open": "^0.2.8",
+    "gulp-rimraf": "^0.1.0",
+    "gulp-uglify": "^0.3.1",
+    "gulp-util": "^2.2.19",
+    "jshint-stylish": "^0.2.0",
+    "minimist": "^0.2.0",
+    "opn": "^0.1.2",
+    "tiny-lr": "0.0.7"
+  }
+}
