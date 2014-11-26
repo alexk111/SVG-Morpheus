@@ -17,26 +17,26 @@ Simply add the svg-morpheus.js script to your website/application. No other scri
 ## Usage
 
 1. Add an icon set SVG to the HTML file where you want to show the morphing icon.
-2. Initialize SVG Morpheus for the icon by calling `SVGMorpheus(DOM)` or `SVGMorpheus(ID)`. **DOM is Object/IFrame/SVG element containing an iconset; ID is an id of Object/IFrame/SVG element containing an iconset**. For example:
+2. Initialize SVG Morpheus for the icon by calling `SVGMorpheus(DOM)` or `SVGMorpheus(ID)`. *DOM is Object/IFrame/SVG element containing an iconset; ID is an id of Object/IFrame/SVG element containing an iconset*. For example:
 
-```
+```javascript
 var myIcons = SVGMorpheus('myIconSet');
 ```
 
-3. After initializing, SVG Morpheus returns an object having `to(ID)` function. **ID is an id of Icon in the icon set.**. Use it to morph the icon to another icon in the icon set.
+3. After initializing, SVG Morpheus returns an object having `to(ID)` function. *ID is an id of Icon in the icon set*. Use it to morph the icon to another icon in the icon set.
 
-```
+```javascript
 myIcons.to('icon1');
 ```
 
 ## Icon Set structure
 
-SVG should have the following node structure to be a valid icon set:
+SVG should have the following structure to be a valid icon set:
 
 - 1st tier nodes are `<g>` elements having 'id' attribute. They define icons in the icon set.
 - 2nd tier nodes are shape elements (`<path>`, `circle`, `rect`, `ellipse`, `polygon`, `line`). They define the icon graphics.
 
-```
+```xml
 <svg>
   <g id="icon1">
     Shape elements
@@ -49,7 +49,7 @@ SVG should have the following node structure to be a valid icon set:
 
 ## Options
 
-```
+```javascript
 var myIcons = SVGMorpheus(DOM, iconId, duration, easing);
 
 ```
@@ -71,7 +71,7 @@ Object/IFrame/SVG element containing an iconset. Can be a DOM element or element
 *Optional*. Set a default easing for transitions. Default: linear.
 
 
-```
+```javascript
 var myIcons.to(iconId, duration, easing);
 
 ```
