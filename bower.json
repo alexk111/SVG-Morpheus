@@ -4,7 +4,7 @@
   "authors": [
     "Alex Kaul <alexkaul@googlemail.com>"
   ],
-  "description": "JavaScript library enabling SVG icons to morph from one to the other. It implements Material Design's transitions.",
+  "description": "JavaScript library enabling SVG icons to morph from one to the other. It implements Material Design's Delightful Details transitions.",
   "main": [
     "compile/minified/svg-morpheus.js"
   ],
