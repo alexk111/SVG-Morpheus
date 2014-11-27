@@ -1,7 +1,7 @@
 'use strict';
 
 window.onload = function () {
-  var svgMorpheus = SVGMorpheus('icon'),
+  var svgMorpheus = new SVGMorpheus('#icon'),
       selIcon     = document.getElementById('selIcon'),
       selEasing   = document.getElementById('selEasing'),
       selDuration = document.getElementById('selDuration'),
