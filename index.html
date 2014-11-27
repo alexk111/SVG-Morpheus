@@ -1,24 +1,173 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>SVG Morpheus</title>
-  <link rel="stylesheet" href="demo.css"/>
-  <script type="text/javascript" src="svg-morpheus.js"></script>
-  <script type="text/javascript" src="demo.js"></script>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG Morpheus - Morph SVG icons</title>
+  <meta name="description" content="Morph SVG icons" />
+  <style type="text/css">
+    body {
+      background: #369;
+      padding:0;
+      margin:0;
+      text-align:center;
+      color: #FFF;
+      font-family: Arial;
+    }
 
-    ga('create', 'UA-377715-16', 'auto');
-    ga('send', 'pageview');
-  </script>
+    #heading {
+      padding: 20px 20px 40px;
+      background: #024;
+    }
+
+    #heading > a {
+      margin-top:30px;
+      display: inline-block;
+      text-decoration: none;
+      color: #FFF;
+      background: #036;
+      padding: 25px 30px;
+      font-size: 22px;
+    }
+
+    h1 {
+      font-size:44px;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size:24px;
+      line-height: 1.5;
+      font-weight: normal;
+    }
+
+    #icon {
+      display: block;
+      box-sizing: border-box;
+      width:100%;
+      height:250px;
+      background: #FFF;
+      margin:auto;
+      padding: 60px;
+    }
+
+    #options {
+      margin-top:50px;
+      text-align:center;
+    }
+
+    .option {
+      width:400px;
+      display: block;
+      margin: auto;
+      overflow: hidden;
+      text-align: left;
+    }
+    label {
+      text-align: right;
+      display: inline-block;
+      font-size:20px;
+      width:100px;
+    }
+    select {
+      font-family: Arial;
+      font-size:20px;
+      font-weight: normal;
+      padding:10px;
+      color: #333;
+      display: inline-block;
+      margin:10px;
+    }
+
+    #footer {
+      margin:40px;
+    }
+
+    @media (max-width: 500px) {
+      #heading {
+        padding: 10px 10px 30px;
+      }
+
+      #heading > a {
+        margin-top:15px;
+        padding: 15px 20px;
+        font-size: 16px;
+      }
+
+      h1 {
+        font-size:34px;
+      }
+      h2 {
+        font-size:18px;
+      }
+
+      #icon {
+        height:150px;
+        padding: 30px;
+      }
+
+      #options {
+        margin-top:35px;
+      }
+
+      .option {
+        width:300px;
+      }
+      label {
+        width:75px;
+      }
+      select {
+        padding:8px;
+      }
+      label, select {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 350px) {
+      #heading > a {
+        font-size: 14px;
+      }
+
+      h1 {
+        font-size:30px;
+      }
+      h2 {
+        font-size:16px;
+      }
+
+      #icon {
+        height:120px;
+        padding: 20px;
+      }
+
+      #options {
+        margin-top:25px;
+      }
+
+      .option {
+        width:250px;
+      }
+      label {
+        width:50px;
+      }
+      select {
+        padding:6px;
+      }
+      label, select {
+        font-size: 12px;
+      }
+    }
+
+  </style>
 </head>
 <body>
   <div id="heading">
     <h1>SVG Morpheus</h1>
-    <h2>Live Demo</h2>
+    <h2>JavaScript library enabling SVG icons to morph from one to the other.</h2>
+    <a href="https://github.com/alexk111/SVG-Morpheus">View on GitHub</a>
   </div>
   <object data="iconset.svg" type="image/svg+xml" id="icon"></object>
   <div id="options">
@@ -36,7 +185,100 @@
     </div>
   </div>
   <div id="footer">
-    <a href="https://github.com/alexk111/SVG-Morpheus">Source Code @ GitHub</a>
   </div>
+
+  <script type="text/javascript" src="svg-morpheus.js"></script>
+  <script type="text/javascript">
+    var svgMorpheus = new SVGMorpheus('#icon'),
+        selIcon     = document.getElementById('selIcon'),
+        selEasing   = document.getElementById('selEasing'),
+        selDuration = document.getElementById('selDuration'),
+        icons={
+          '3d_rotation':'3D Rotation',
+          'accessibility':'Accessibility',
+          'account_balance':'Account Balance',
+          'account_box':'Account Box',
+          'account_circle':'Account Circle',
+          'add_shopping_cart':'Add Shopping Cart',
+          'android':'Android',
+          'backup':'Backup',
+          'bookmark':'Bookmark',
+          'bug_report':'Bug Report',
+          'credit_card':'Credit Card',
+          'delete':'Delete',
+          'done':'Done',
+          'drawer':'Drawer',
+          'event':'Event',
+          'exit_to_app':'Exit To App',
+          'explore':'Explore',
+          'extension':'Extension',
+          'favorite':'Favorite',
+          'help':'Help',
+          'history':'History',
+          'home':'Home',
+          'https':'Https',
+          'info':'Info',
+          'input':'Input',
+          'invert_colors':'Invert Colors',
+          'label':'Label',
+          'language':'Language',
+          'launch':'Launch',
+          'loyalty':'Loyalty',
+          'polymer':'Polymer',
+          'print':'Print',
+          'receipt':'Receipt'
+        },
+        easings={
+          'circ-in': 'Circ In','circ-out': 'Circ Out','circ-in-out': 'Circ In/Out',
+          'cubic-in': 'Cubic In', 'cubic-out': 'Cubic Out', 'cubic-in-out': 'Cubic In/Out',
+          'elastic-in': 'Elastic In', 'elastic-out': 'Elastic Out', 'elastic-in-out': 'Elastic In/Out',
+          'expo-in': 'Expo In', 'expo-out': 'Expo Out', 'expo-in-out': 'Expo In/Out',
+          'linear': 'Linear',
+          'quad-in': 'Quad In', 'quad-out': 'Quad Out', 'quad-in-out': 'Quad In/Out',
+          'quart-in': 'Quart In', 'quart-out': 'Quart Out', 'quart-in-out': 'Quart In/Out',
+          'quint-in': 'Quint In', 'quint-out': 'Quint Out', 'quint-in-out': 'Quint In/Out',
+          'sine-in': 'Sine In','sine-out': 'Sine Out','sine-in-out': 'Sine In/Out'
+        },
+        durations=[250, 500, 750, 1000, 5000];
+
+    var key, i, len;
+
+    for(key in icons) {
+      selIcon.options[selIcon.options.length]=new Option(icons[key], key);
+    }
+
+    for(key in easings) {
+      selEasing.options[selEasing.options.length]=new Option(easings[key], key);
+    }
+
+    for(i=0, len=durations.length;i<len;i++) {
+      selDuration.options[selDuration.options.length]=new Option(durations[i], durations[i]);
+    }
+
+    selIcon.selectedIndex=selIcon.options.length-1;
+    selEasing.selectedIndex=15;
+    selDuration.selectedIndex=1;
+
+    function getSelValue(sel) {
+      return sel.options[sel.selectedIndex].value;
+    }
+    selIcon.addEventListener('change', function() {
+      var valIcon=getSelValue(selIcon),
+          valEasing=getSelValue(selEasing),
+          valDuration=getSelValue(selDuration);
+      svgMorpheus.to(valIcon, valDuration, valEasing);
+    });
+  </script>
+  <!--
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-377715-16', 'auto');
+    ga('send', 'pageview');
+  </script>
+  -->
 </body>
 </html>
