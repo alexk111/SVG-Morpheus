@@ -43,6 +43,18 @@
       font-weight: normal;
     }
 
+    p {
+      font-size:18px;
+      line-height: 1.5;
+      font-weight: normal;
+    }
+    p > a{
+      color: #FFF;
+      text-decoration: none;
+      padding-bottom: 2px;
+      border-bottom: 1px dashed #FFF;
+    }
+
     #icon {
       display: block;
       box-sizing: border-box;
@@ -100,6 +112,10 @@
         font-size:18px;
       }
 
+      p {
+        font-size: 16px;
+      }
+
       #icon {
         height:150px;
         padding: 30px;
@@ -135,6 +151,10 @@
         font-size:16px;
       }
 
+      p {
+        font-size: 14px;
+      }
+
       #icon {
         height:120px;
         padding: 20px;
@@ -164,6 +184,7 @@
   <div id="heading">
     <h1>SVG Morpheus</h1>
     <h2>JavaScript library enabling SVG icons to morph from one to the other.</h2>
+    <p>It implements Material Design's <a href="http://www.google.com/design/spec/animation/delightful-details.html" target="_blank">Delightful Details transitions</a>.</p>
     <a href="https://github.com/alexk111/SVG-Morpheus">View on GitHub</a>
   </div>
   <object data="iconset.svg" type="image/svg+xml" id="icon"></object>
