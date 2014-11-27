@@ -78,6 +78,6 @@ window.onload = function () {
     var valIcon=getSelValue(selIcon),
         valEasing=getSelValue(selEasing),
         valDuration=getSelValue(selDuration);
-    svgMorpheus.to(valIcon, valDuration, valEasing);
+    svgMorpheus.to(valIcon, {duration: valDuration, easing: valEasing});
   });
 };

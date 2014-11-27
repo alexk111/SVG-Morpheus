@@ -37,6 +37,52 @@ var myIcons = new SVGMorpheus('#myIconSet');
 myIcons.to('icon1');
 ```
 
+
+## Options
+
+### SVGMorpheus Constructor
+
+```javascript
+var myIcons = new SVGMorpheus(element, options, callback);
+
+```
+
+**element** - Object/IFrame/SVG element containing an icon set. Can be a DOM element or a CSS query selector.
+
+**options** - *Optional*. Object specifying default options.
+
+**options.iconId** - *Optional*. Id of an icon shown after initialization. Default: last icon in the icon set.
+
+**options.duration** - *Optional*. Set a default duration for transition animations, in msec. Default: 750.
+
+**options.easing** - *Optional*. Set a default easing for transition animations. Default: quad-in-out.
+
+**callback** - *Optional*. Set a default callback function to call at the animation end.
+
+
+### SVGMorpheus.to()
+
+```javascript
+myIcons.to(iconId, options, callback);
+
+```
+
+**iconId** - Id of an icon to transition to.
+
+**options** - *Optional*. Object specifying the animation options.
+
+**options.duration** - *Optional*. Set a duration for the animation, in msec.
+
+**options.easing** - *Optional*. Set an easing for the animation.
+
+**callback** - *Optional*. Set a callback function to call at the animation end.
+
+
+## Supported Easings
+
+`circ-in`, `circ-out`, `circ-in-out`, `cubic-in`, `cubic-out`, `cubic-in-out`, `elastic-in`, `elastic-out`, `elastic-in-out`, `expo-in`, `expo-out`, `expo-in-out`, `linear`, `quad-in`, `quad-out`, `quad-in-out`, `quart-in`, `quart-out`, `quart-in-out`, `quint-in`, `quint-out`, `quint-in-out`, `sine-in`, `sine-out`, `sine-in-out`
+
+
 ## Icon Set structure
 
 SVG should have the following structure to be a valid icon set:
@@ -54,42 +100,6 @@ SVG should have the following structure to be a valid icon set:
   </g>
 </svg>
 ```
-
-## Options
-
-### SVGMorpheus Constructor
-
-```javascript
-var myIcons = new SVGMorpheus(element, iconId, duration, easing);
-
-```
-
-**element** - Object/IFrame/SVG element containing an icon set. Can be a DOM element or a CSS query selector.
-
-**iconId** - *Optional*. Id of an icon shown after initialization. Default: last icon in the icon set.
-
-**duration** - *Optional*. Set a default duration for transitions, in msec. Default: 1000.
-
-**easing** - *Optional*. Set a default easing for transitions. Default: linear.
-
-
-### SVGMorpheus.to()
-
-```javascript
-myIcons.to(iconId, duration, easing);
-
-```
-
-**iconId** Id of an icon to transition to.
-
-**duration** *Optional*. Set a duration for the transition, in msec.
-
-**easing** *Optional*. Set an easing for the transition.
-
-
-## Supported Easings
-
-`circ-in`, `circ-out`, `circ-in-out`, `cubic-in`, `cubic-out`, `cubic-in-out`, `elastic-in`, `elastic-out`, `elastic-in-out`, `expo-in`, `expo-out`, `expo-in-out`, `linear`, `quad-in`, `quad-out`, `quad-in-out`, `quart-in`, `quart-out`, `quart-in-out`, `quint-in`, `quint-out`, `quint-in-out`, `sine-in`, `sine-out`, `sine-in-out`
 
 
 ## Example code

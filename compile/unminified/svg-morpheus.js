@@ -5,7 +5,7 @@
  * Copyright (c) 2014 Alex Kaul
  * License: MIT
  *
- * Generated at Thursday, November 27th, 2014, 10:46:41 AM
+ * Generated at Thursday, November 27th, 2014, 2:18:06 PM
  */
 var SVGMorpheus=(function() {
 'use strict';
@@ -1010,19 +1010,31 @@ var getRGB = function (colour) {
   return {r: -1, g: -1, b: -1, opacity: -1, error: 1};
 };
 
-function SVGMorpheus(iconElement, iconId, duration, easing) {
-  if(!iconElement) {
-    return null;
+function SVGMorpheus(element, options, callback) {
+  if (!element) {
+    throw new Error('SVGMorpheus > "element" is required');
   }
 
-  if(typeof iconElement === typeof '') {
-    iconElement=document.querySelector(iconElement);
+  if(typeof element === typeof '') {
+    element=document.querySelector(element);
+    if (!element) {
+      throw new Error('SVGMorpheus > "element" query is not related to an existing DOM node');
+    }
+  }
+
+  if (!!options && typeof options !== typeof {}) {
+    throw new Error('SVGMorpheus > "options" parameter must be an object');
+  }
+  options = options || {};
+
+  if (!!callback && typeof callback !== typeof (function(){})) {
+    throw new Error('SVGMorpheus > "callback" parameter must be a function');
   }
 
   var that=this;
 
   this._icons={};
-  this._curIconId=iconId || '';
+  this._curIconId=options.iconId || '';
   this._toIconId='';
   this._curIconItems=[];
   this._fromIconItems=[];
@@ -1030,8 +1042,12 @@ function SVGMorpheus(iconElement, iconId, duration, easing) {
   this._morphNodes=[];
   this._morphG;
   this._startTime;
-  this._duration=duration || 1000;
-  this._easing=easing || 'linear';
+  this._defDuration=options.duration || 750;
+  this._defEasing=options.easing || 'quad-in-out';
+  this._defCallback = callback || function () {};
+  this._duration=this._defDuration;
+  this._easing=this._defEasing;
+  this._callback=this._defCallback;
   this._rafid;
 
   this._fnTick=function(timePassed) {
@@ -1047,14 +1063,14 @@ function SVGMorpheus(iconElement, iconId, duration, easing) {
     }
   };
 
-  if(iconElement.nodeName.toUpperCase()==='SVG') {
-    this._svgDoc=iconElement;
+  if(element.nodeName.toUpperCase()==='SVG') {
+    this._svgDoc=element;
   } else {
-    this._svgDoc = iconElement.getSVGDocument();
+    this._svgDoc = element.getSVGDocument();
   }
   if(!this._svgDoc) {
-    iconElement.addEventListener("load",function(){
-      that._svgDoc = iconElement.getSVGDocument();
+    element.addEventListener("load",function(){
+      that._svgDoc = element.getSVGDocument();
       that._init();
     },false);
   } else {
@@ -1337,6 +1353,8 @@ SVGMorpheus.prototype._animationEnd=function() {
 
   this._curIconId=this._toIconId;
   this._toIconId='';
+
+  this._callback();
 };
 
 /*
@@ -1344,15 +1362,23 @@ SVGMorpheus.prototype._animationEnd=function() {
  */
 
 // Morph To Icon
-SVGMorpheus.prototype.to=function(iconId, duration, easing) {
+SVGMorpheus.prototype.to=function(iconId, options, callback) {
   if(iconId!==this._toIconId) {
+    if (!!options && typeof options !== typeof {}) {
+      throw new Error('SVGMorpheus.to() > "options" parameter must be an object');
+    }
+    options = options || {};
+
+    if (!!callback && typeof callback !== typeof (function(){})) {
+      throw new Error('SVGMorpheus.to() > "callback" parameter must be a function');
+    }
+
     _cancelAnimFrame(this._rafid);
-    if(!!duration) {
-      this._duration=duration;
-    }
-    if(!!easing) {
-      this._easing=easing;
-    }
+
+    this._duration=options.duration || this._defDuration;
+    this._easing=options.easing || this._defEasing;
+    this._callback=callback || this._defCallback;
+
     this._setupAnimation(iconId);
     this._rafid=_reqAnimFrame(this._fnTick);
   }
