@@ -8,6 +8,14 @@ JavaScript library enabling SVG icons to morph from one to the other. It impleme
 
 ## Installing
 
+### Download
+
+You have two options to get the library:
+- [Download SVG Morpheus](https://github.com/alexk111/SVG-Morpheus/archive/master.zip) from GitHub.
+- Use Bower to download the library. Just run `bower install svg-morpheus` in the directory you want to download the files to.
+
+### Add Script
+
 Simply add the svg-morpheus.js script to your website/application. No other scripts are needed. Both the minified and uncompressed (for development) versions are in the /compile folder.
 
 ```html
