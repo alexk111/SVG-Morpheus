@@ -40,3 +40,5 @@ Icon
 bower_components/
 node_modules/
 
+# GitHub pages
+gh-pages/

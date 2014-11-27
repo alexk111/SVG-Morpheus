@@ -17,13 +17,13 @@ Simply add the svg-morpheus.js script to your website/application. No other scri
 ## Usage
 
 1. Add an icon set SVG to the HTML file where you want to show the morphing icon.
-2. Initialize SVG Morpheus for the icon by calling `SVGMorpheus(DOM)` or `SVGMorpheus(ID)`. *DOM is Object/IFrame/SVG element containing an iconset; ID is an id of Object/IFrame/SVG element containing an iconset*. For example:
+2. Create a SVG Morpheus instance for the icon set by calling `new SVGMorpheus(element)`. *Object/IFrame/Inline SVG element containing the icon set. Can be a DOM element or a CSS query selector.*. For example:
 
 ```javascript
-var myIcons = SVGMorpheus('myIconSet');
+var myIcons = new SVGMorpheus('#myIconSet');
 ```
 
-3. After initializing, SVG Morpheus returns an object having `to(ID)` function. *ID is an id of Icon in the icon set*. Use it to morph the icon to another icon in the icon set.
+3. After initializing, you get a SVGMorpheus object having `to(ID)` function. *ID is an id of Icon in the icon set*. Use it to morph the icon to another icon in the icon set.
 
 ```javascript
 myIcons.to('icon1');
@@ -49,23 +49,23 @@ SVG should have the following structure to be a valid icon set:
 
 ## Options
 
-### SVGMorpheus()
+### SVGMorpheus Constructor
 
 ```javascript
-var myIcons = SVGMorpheus(DOM, iconId, duration, easing);
+var myIcons = new SVGMorpheus(element, iconId, duration, easing);
 
 ```
 
-**DOM** Object/IFrame/SVG element containing an iconset. Can be a DOM element or element id.
+**element** - Object/IFrame/SVG element containing an icon set. Can be a DOM element or a CSS query selector.
 
-**iconId** *Optional*. Id of an icon shown after initialization. Default: last icon in the icon set.
+**iconId** - *Optional*. Id of an icon shown after initialization. Default: last icon in the icon set.
 
-**duration** *Optional*. Set a default duration for transitions, in msec. Default: 1000.
+**duration** - *Optional*. Set a default duration for transitions, in msec. Default: 1000.
 
-**easing** *Optional*. Set a default easing for transitions. Default: linear.
+**easing** - *Optional*. Set a default easing for transitions. Default: linear.
 
 
-### to()
+### SVGMorpheus.to()
 
 ```javascript
 myIcons.to(iconId, duration, easing);
