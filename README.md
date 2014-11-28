@@ -111,6 +111,18 @@ SVG should have the following structure to be a valid icon set:
 Check the Demos directory for examples.
 
 
+## Supported browsers
+
+Chrome
+Firefox
+IE >= 10
+Safari
+Opera
+iOS Safari
+Android Browser >= 4.4
+Chrome for Android
+
+
 ## License
 
 See the [LICENSE](https://github.com/alexk111/SVG-Morpheus/blob/master/LICENSE) file.
