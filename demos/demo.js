@@ -5,6 +5,7 @@ window.onload = function () {
       selIcon     = document.getElementById('selIcon'),
       selEasing   = document.getElementById('selEasing'),
       selDuration = document.getElementById('selDuration'),
+      selRotation = document.getElementById('selRotation'),
       icons={
         '3d_rotation':'3D Rotation',
         'accessibility':'Accessibility',
@@ -51,7 +52,13 @@ window.onload = function () {
         'quint-in': 'Quint In', 'quint-out': 'Quint Out', 'quint-in-out': 'Quint In/Out',
         'sine-in': 'Sine In','sine-out': 'Sine Out','sine-in-out': 'Sine In/Out'
       },
-      durations=[250, 500, 750, 1000, 5000];
+      durations=[250, 500, 750, 1000, 5000],
+      rotations={
+        'clock': 'Clockwise',
+        'counterclock': 'Counterclockwise',
+        'random': 'Random',
+        'none': 'None'
+      };
 
   var key, i, len;
 
@@ -67,9 +74,15 @@ window.onload = function () {
     selDuration.options[selDuration.options.length]=new Option(durations[i], durations[i]);
   }
 
+  for(key in rotations) {
+    selRotation.options[selRotation.options.length]=new Option(rotations[key], key);
+  }
+
+
   selIcon.selectedIndex=selIcon.options.length-1;
   selEasing.selectedIndex=15;
   selDuration.selectedIndex=2;
+  selRotation.selectedIndex=0;
 
   function getSelValue(sel) {
     return sel.options[sel.selectedIndex].value;
@@ -77,7 +90,8 @@ window.onload = function () {
   selIcon.addEventListener('change', function() {
     var valIcon=getSelValue(selIcon),
         valEasing=getSelValue(selEasing),
-        valDuration=getSelValue(selDuration);
-    svgMorpheus.to(valIcon, {duration: valDuration, easing: valEasing});
+        valDuration=getSelValue(selDuration),
+        valRotation=getSelValue(selRotation);
+    svgMorpheus.to(valIcon, {duration: valDuration, easing: valEasing, rotation: valRotation});
   });
 };

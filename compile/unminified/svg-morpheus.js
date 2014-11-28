@@ -1,11 +1,11 @@
 /*!
- * SVG Morpheus v0.1.6
+ * SVG Morpheus v0.1.7
  * https://github.com/alexk111/SVG-Morpheus
  *
  * Copyright (c) 2014 Alex Kaul
  * License: MIT
  *
- * Generated at Thursday, November 27th, 2014, 2:22:49 PM
+ * Generated at Friday, November 28th, 2014, 10:32:00 AM
  */
 var SVGMorpheus=(function() {
 'use strict';
@@ -1044,9 +1044,11 @@ function SVGMorpheus(element, options, callback) {
   this._startTime;
   this._defDuration=options.duration || 750;
   this._defEasing=options.easing || 'quad-in-out';
+  this._defRotation=options.rotation || 'clock';
   this._defCallback = callback || function () {};
   this._duration=this._defDuration;
   this._easing=this._defEasing;
+  this._rotation=this._defRotation;
   this._callback=this._defCallback;
   this._rafid;
 
@@ -1299,12 +1301,34 @@ SVGMorpheus.prototype._setupAnimation=function(toIconId) {
       toIconItem.trans={
         'rotate': [0,toBB.cx,toBB.cy]
       };
-      if(!!fromIconItem.trans.rotate) {
-        toIconItem.trans.rotate[0]=fromIconItem.trans.rotate[0]+360;
-        var degAdd=fromIconItem.trans.rotate[0]%360;
-        toIconItem.trans.rotate[0]+=(degAdd<180?-degAdd:360-degAdd);
-      } else {
-        toIconItem.trans.rotate[0]=360;
+      var rotation=this._rotation, degAdd;
+      if(rotation==='random') {
+        rotation=Math.random()<0.5?'counterclock':'clock';
+      }
+      switch(rotation) {
+        case 'none':
+          if(!!fromIconItem.trans.rotate) {
+            toIconItem.trans.rotate[0]=fromIconItem.trans.rotate[0];
+          }
+          break;
+        case 'counterclock':
+          if(!!fromIconItem.trans.rotate) {
+            toIconItem.trans.rotate[0]=fromIconItem.trans.rotate[0]-360;
+            degAdd=-fromIconItem.trans.rotate[0]%360;
+            toIconItem.trans.rotate[0]+=(degAdd<180?degAdd:degAdd-360);
+          } else {
+            toIconItem.trans.rotate[0]=-360;
+          }
+          break;
+        default: // Clockwise
+          if(!!fromIconItem.trans.rotate) {
+            toIconItem.trans.rotate[0]=fromIconItem.trans.rotate[0]+360;
+            degAdd=fromIconItem.trans.rotate[0]%360;
+            toIconItem.trans.rotate[0]+=(degAdd<180?-degAdd:360-degAdd);
+          } else {
+            toIconItem.trans.rotate[0]=360;
+          }
+          break;
       }
     }
 
@@ -1377,6 +1401,7 @@ SVGMorpheus.prototype.to=function(iconId, options, callback) {
 
     this._duration=options.duration || this._defDuration;
     this._easing=options.easing || this._defEasing;
+    this._rotation=options.rotation || this._defRotation;
     this._callback=callback || this._defCallback;
 
     this._setupAnimation(iconId);

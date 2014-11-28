@@ -57,6 +57,8 @@ var myIcons = new SVGMorpheus(element, options, callback);
 
 **options.easing** - *Optional*. Set a default easing for transition animations. Default: quad-in-out.
 
+**options.rotation** - *Optional*. Set a default rotation for icon shapes. `clock` = clockwise, `counterclock` = counterclockwise, `random` = randomly set clock/counterclock, `none` = no rotation. Default: clock.
+
 **callback** - *Optional*. Set a default callback function to call at the animation end.
 
 
@@ -74,6 +76,8 @@ myIcons.to(iconId, options, callback);
 **options.duration** - *Optional*. Set a duration for the animation, in msec.
 
 **options.easing** - *Optional*. Set an easing for the animation.
+
+**options.rotation** - *Optional*. Set a rotation for icon shapes. `clock` = clockwise, `counterclock` = counterclockwise, `random` = randomly set clock/counterclock, `none` = no rotation.
 
 **callback** - *Optional*. Set a callback function to call at the animation end.
 
