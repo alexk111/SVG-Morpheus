@@ -8,84 +8,96 @@ var _reqAnimFrame = window.requestAnimationFrame || window.mozRequestAnimationFr
 var _cancelAnimFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame || window.webkitCancelAnimationFrame || window.oCancelAnimationFrame;
 
 
-// Calculate attrs
-function attrsNormCalc(attrsNormFrom, attrsNormTo, progress) {
-  var i, len, attrsNorm={};
-  for(i in attrsNormFrom) {
+// Calculate style
+function styleNormCalc(styleNormFrom, styleNormTo, progress) {
+  var i, len, styleNorm={};
+  for(i in styleNormFrom) {
     switch (i) {
       case 'fill':
       case 'stroke':
-        attrsNorm[i]=clone(attrsNormFrom[i]);
-        attrsNorm[i].r=attrsNormFrom[i].r+(attrsNormTo[i].r-attrsNormFrom[i].r)*progress;
-        attrsNorm[i].g=attrsNormFrom[i].g+(attrsNormTo[i].g-attrsNormFrom[i].g)*progress;
-        attrsNorm[i].b=attrsNormFrom[i].b+(attrsNormTo[i].b-attrsNormFrom[i].b)*progress;
-        attrsNorm[i].opacity=attrsNormFrom[i].opacity+(attrsNormTo[i].opacity-attrsNormFrom[i].opacity)*progress;
+        styleNorm[i]=clone(styleNormFrom[i]);
+        styleNorm[i].r=styleNormFrom[i].r+(styleNormTo[i].r-styleNormFrom[i].r)*progress;
+        styleNorm[i].g=styleNormFrom[i].g+(styleNormTo[i].g-styleNormFrom[i].g)*progress;
+        styleNorm[i].b=styleNormFrom[i].b+(styleNormTo[i].b-styleNormFrom[i].b)*progress;
+        styleNorm[i].opacity=styleNormFrom[i].opacity+(styleNormTo[i].opacity-styleNormFrom[i].opacity)*progress;
         break;
+      case 'opacity':
+      case 'fill-opacity':
+      case 'stroke-opacity':
       case 'stroke-width':
-        attrsNorm[i]=attrsNormFrom[i]+(attrsNormTo[i]-attrsNormFrom[i])*progress;
+        styleNorm[i]=styleNormFrom[i]+(styleNormTo[i]-styleNormFrom[i])*progress;
         break;
     }
   }
-  return attrsNorm;
+  return styleNorm;
 }
 
-function attrsNormToString(attrsNorm) {
+function styleNormToString(styleNorm) {
   var i;
-  var styleAttrs={};
-  for(i in attrsNorm) {
+  var style={};
+  for(i in styleNorm) {
     switch (i) {
       case 'fill':
       case 'stroke':
-        styleAttrs[i]=rgbToString(attrsNorm[i]);
+        style[i]=rgbToString(styleNorm[i]);
         break;
+      case 'opacity':
+      case 'fill-opacity':
+      case 'stroke-opacity':
       case 'stroke-width':
-        styleAttrs[i]=attrsNorm[i];
+        style[i]=styleNorm[i];
         break;
     }
   }
-  return styleAttrs;
+  return style;
 }
 
-function attrsToNorm(attrsFrom, attrsTo) {
-  var attrsNorm=[{},{}];
+function styleToNorm(styleFrom, styleTo) {
+  var styleNorm=[{},{}];
   var i;
-  for(i in attrsFrom) {
+  for(i in styleFrom) {
     switch(i) {
       case 'fill':
       case 'stroke':
-        attrsNorm[0][i]=getRGB(attrsFrom[i]);
-        if(attrsTo[i]===undefined) {
-          attrsNorm[1][i]=getRGB(attrsFrom[i]);
-          attrsNorm[1][i].opacity=0;
+        styleNorm[0][i]=getRGB(styleFrom[i]);
+        if(styleTo[i]===undefined) {
+          styleNorm[1][i]=getRGB(styleFrom[i]);
+          styleNorm[1][i].opacity=0;
         }
         break;
+      case 'opacity':
+      case 'fill-opacity':
+      case 'stroke-opacity':
       case 'stroke-width':
-        attrsNorm[0][i]=attrsFrom[i];
-        if(attrsTo[i]===undefined) {
-          attrsNorm[1][i]=1;
+        styleNorm[0][i]=styleFrom[i];
+        if(styleTo[i]===undefined) {
+          styleNorm[1][i]=1;
         }
         break;
     }
   }
-  for(i in attrsTo) {
+  for(i in styleTo) {
     switch(i) {
       case 'fill':
       case 'stroke':
-        attrsNorm[1][i]=getRGB(attrsTo[i]);
-        if(attrsFrom[i]===undefined) {
-          attrsNorm[0][i]=getRGB(attrsTo[i]);
-          attrsNorm[0][i].opacity=0;
+        styleNorm[1][i]=getRGB(styleTo[i]);
+        if(styleFrom[i]===undefined) {
+          styleNorm[0][i]=getRGB(styleTo[i]);
+          styleNorm[0][i].opacity=0;
         }
         break;
+      case 'opacity':
+      case 'fill-opacity':
+      case 'stroke-opacity':
       case 'stroke-width':
-        attrsNorm[1][i]=attrsTo[i];
-        if(attrsFrom[i]===undefined) {
-          attrsNorm[0][i]=1;
+        styleNorm[1][i]=styleTo[i];
+        if(styleFrom[i]===undefined) {
+          styleNorm[0][i]=1;
         }
         break;
     }
   }
-  return attrsNorm;
+  return styleNorm;
 }
 
 // Calculate transform progress

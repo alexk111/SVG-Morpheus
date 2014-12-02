@@ -1,11 +1,11 @@
 /*!
- * SVG Morpheus v0.1.7
+ * SVG Morpheus v0.1.8
  * https://github.com/alexk111/SVG-Morpheus
  *
  * Copyright (c) 2014 Alex Kaul
  * License: MIT
  *
- * Generated at Friday, November 28th, 2014, 10:32:00 AM
+ * Generated at Tuesday, December 2nd, 2014, 11:12:16 AM
  */
 var SVGMorpheus=(function() {
 'use strict';
@@ -90,84 +90,96 @@ easings['sine-in-out']=function (t) {
 var _reqAnimFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.oRequestAnimationFrame;
 var _cancelAnimFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame || window.webkitCancelAnimationFrame || window.oCancelAnimationFrame;
 
-// Calculate attrs
-function attrsNormCalc(attrsNormFrom, attrsNormTo, progress) {
-  var i, len, attrsNorm={};
-  for(i in attrsNormFrom) {
+// Calculate style
+function styleNormCalc(styleNormFrom, styleNormTo, progress) {
+  var i, len, styleNorm={};
+  for(i in styleNormFrom) {
     switch (i) {
       case 'fill':
       case 'stroke':
-        attrsNorm[i]=clone(attrsNormFrom[i]);
-        attrsNorm[i].r=attrsNormFrom[i].r+(attrsNormTo[i].r-attrsNormFrom[i].r)*progress;
-        attrsNorm[i].g=attrsNormFrom[i].g+(attrsNormTo[i].g-attrsNormFrom[i].g)*progress;
-        attrsNorm[i].b=attrsNormFrom[i].b+(attrsNormTo[i].b-attrsNormFrom[i].b)*progress;
-        attrsNorm[i].opacity=attrsNormFrom[i].opacity+(attrsNormTo[i].opacity-attrsNormFrom[i].opacity)*progress;
+        styleNorm[i]=clone(styleNormFrom[i]);
+        styleNorm[i].r=styleNormFrom[i].r+(styleNormTo[i].r-styleNormFrom[i].r)*progress;
+        styleNorm[i].g=styleNormFrom[i].g+(styleNormTo[i].g-styleNormFrom[i].g)*progress;
+        styleNorm[i].b=styleNormFrom[i].b+(styleNormTo[i].b-styleNormFrom[i].b)*progress;
+        styleNorm[i].opacity=styleNormFrom[i].opacity+(styleNormTo[i].opacity-styleNormFrom[i].opacity)*progress;
         break;
+      case 'opacity':
+      case 'fill-opacity':
+      case 'stroke-opacity':
       case 'stroke-width':
-        attrsNorm[i]=attrsNormFrom[i]+(attrsNormTo[i]-attrsNormFrom[i])*progress;
+        styleNorm[i]=styleNormFrom[i]+(styleNormTo[i]-styleNormFrom[i])*progress;
         break;
     }
   }
-  return attrsNorm;
+  return styleNorm;
 }
 
-function attrsNormToString(attrsNorm) {
+function styleNormToString(styleNorm) {
   var i;
-  var styleAttrs={};
-  for(i in attrsNorm) {
+  var style={};
+  for(i in styleNorm) {
     switch (i) {
       case 'fill':
       case 'stroke':
-        styleAttrs[i]=rgbToString(attrsNorm[i]);
+        style[i]=rgbToString(styleNorm[i]);
         break;
+      case 'opacity':
+      case 'fill-opacity':
+      case 'stroke-opacity':
       case 'stroke-width':
-        styleAttrs[i]=attrsNorm[i];
+        style[i]=styleNorm[i];
         break;
     }
   }
-  return styleAttrs;
+  return style;
 }
 
-function attrsToNorm(attrsFrom, attrsTo) {
-  var attrsNorm=[{},{}];
+function styleToNorm(styleFrom, styleTo) {
+  var styleNorm=[{},{}];
   var i;
-  for(i in attrsFrom) {
+  for(i in styleFrom) {
     switch(i) {
       case 'fill':
       case 'stroke':
-        attrsNorm[0][i]=getRGB(attrsFrom[i]);
-        if(attrsTo[i]===undefined) {
-          attrsNorm[1][i]=getRGB(attrsFrom[i]);
-          attrsNorm[1][i].opacity=0;
+        styleNorm[0][i]=getRGB(styleFrom[i]);
+        if(styleTo[i]===undefined) {
+          styleNorm[1][i]=getRGB(styleFrom[i]);
+          styleNorm[1][i].opacity=0;
         }
         break;
+      case 'opacity':
+      case 'fill-opacity':
+      case 'stroke-opacity':
       case 'stroke-width':
-        attrsNorm[0][i]=attrsFrom[i];
-        if(attrsTo[i]===undefined) {
-          attrsNorm[1][i]=1;
+        styleNorm[0][i]=styleFrom[i];
+        if(styleTo[i]===undefined) {
+          styleNorm[1][i]=1;
         }
         break;
     }
   }
-  for(i in attrsTo) {
+  for(i in styleTo) {
     switch(i) {
       case 'fill':
       case 'stroke':
-        attrsNorm[1][i]=getRGB(attrsTo[i]);
-        if(attrsFrom[i]===undefined) {
-          attrsNorm[0][i]=getRGB(attrsTo[i]);
-          attrsNorm[0][i].opacity=0;
+        styleNorm[1][i]=getRGB(styleTo[i]);
+        if(styleFrom[i]===undefined) {
+          styleNorm[0][i]=getRGB(styleTo[i]);
+          styleNorm[0][i].opacity=0;
         }
         break;
+      case 'opacity':
+      case 'fill-opacity':
+      case 'stroke-opacity':
       case 'stroke-width':
-        attrsNorm[1][i]=attrsTo[i];
-        if(attrsFrom[i]===undefined) {
-          attrsNorm[0][i]=1;
+        styleNorm[1][i]=styleTo[i];
+        if(styleFrom[i]===undefined) {
+          styleNorm[0][i]=1;
         }
         break;
     }
   }
-  return attrsNorm;
+  return styleNorm;
 }
 
 // Calculate transform progress
@@ -1101,7 +1113,8 @@ SVGMorpheus.prototype._init=function(){
             var nodeItem=nodeIcon.childNodes[j];
             item={
               path: '',
-              attrs: {}
+              attrs: {},
+              style: {}
             };
 
             // Get Item Path (Convert all shapes into Path Data)
@@ -1169,12 +1182,30 @@ SVGMorpheus.prototype._init=function(){
                   var name=attrib.name.toLowerCase();
                   switch (name) {
                     case 'fill':
+                    case 'fill-opacity':
+                    case 'opacity':
                     case 'stroke':
+                    case 'stroke-opacity':
                     case 'stroke-width':
                       item.attrs[name]=attrib.value;
                   }
                 }
               }
+
+              // Traverse all inline styles and get supported values
+              for (var l = 0, len4=nodeItem.style.length; l < len4; l++) {
+                var styleName = nodeItem.style[l];
+                switch (styleName) {
+                  case 'fill':
+                  case 'fill-opacity':
+                  case 'opacity':
+                  case 'stroke':
+                  case 'stroke-opacity':
+                  case 'stroke-width':
+                    item.style[styleName]=nodeItem.style[styleName];
+                }
+              }
+
               items.push(item);
             }
           }
@@ -1233,6 +1264,7 @@ SVGMorpheus.prototype._setupAnimation=function(toIconId) {
           this._fromIconItems.push({
             path: 'M'+toBB.cx+','+toBB.cy+'l0,0',
             attrs: {},
+            style: {},
             trans: {
               'rotate': [0,toBB.cx,toBB.cy]
             }
@@ -1241,6 +1273,7 @@ SVGMorpheus.prototype._setupAnimation=function(toIconId) {
           this._fromIconItems.push({
             path: 'M0,0l0,0',
             attrs: {},
+            style: {},
             trans: {
               'rotate': [0,0,0]
             }
@@ -1253,6 +1286,7 @@ SVGMorpheus.prototype._setupAnimation=function(toIconId) {
           this._toIconItems.push({
             path: 'M'+toBB.cx+','+toBB.cy+'l0,0',
             attrs: {},
+            style: {},
             trans: {
               'rotate': [0,toBB.cx,toBB.cy]
             }
@@ -1261,6 +1295,7 @@ SVGMorpheus.prototype._setupAnimation=function(toIconId) {
           this._toIconItems.push({
             path: 'M0,0l0,0',
             attrs: {},
+            style: {},
             trans: {
               'rotate': [0,0,0]
             }
@@ -1290,11 +1325,18 @@ SVGMorpheus.prototype._setupAnimation=function(toIconId) {
       toIconItem.curve=curves[1];
 
       // Normalize from/to attrs
-      var attrsNorm=attrsToNorm(this._fromIconItems[i].attrs,this._toIconItems[i].attrs);
+      var attrsNorm=styleToNorm(this._fromIconItems[i].attrs,this._toIconItems[i].attrs);
       fromIconItem.attrsNorm=attrsNorm[0];
       toIconItem.attrsNorm=attrsNorm[1];
-      fromIconItem.attrs=attrsNormToString(fromIconItem.attrsNorm);
-      toIconItem.attrs=attrsNormToString(toIconItem.attrsNorm);
+      fromIconItem.attrs=styleNormToString(fromIconItem.attrsNorm);
+      toIconItem.attrs=styleNormToString(toIconItem.attrsNorm);
+
+      // Normalize from/to style
+      var styleNorm=styleToNorm(this._fromIconItems[i].style,this._toIconItems[i].style);
+      fromIconItem.styleNorm=styleNorm[0];
+      toIconItem.styleNorm=styleNorm[1];
+      fromIconItem.style=styleNormToString(fromIconItem.styleNorm);
+      toIconItem.style=styleNormToString(toIconItem.styleNorm);
 
       // Calculate from/to transform
       toBB=curvePathBBox(toIconItem.curve);
@@ -1339,14 +1381,17 @@ SVGMorpheus.prototype._setupAnimation=function(toIconId) {
 SVGMorpheus.prototype._updateAnimationProgress=function(progress) {
   progress=easings[this._easing](progress);
 
-  var i, j, len;
+  var i, j, k, len;
   // Update path/attrs/transform
   for(i=0, len=this._curIconItems.length;i<len;i++) {
     this._curIconItems[i].curve=curveCalc(this._fromIconItems[i].curve, this._toIconItems[i].curve, progress);
     this._curIconItems[i].path=path2string(this._curIconItems[i].curve);
 
-    this._curIconItems[i].attrsNorm=attrsNormCalc(this._fromIconItems[i].attrsNorm, this._toIconItems[i].attrsNorm, progress);
-    this._curIconItems[i].attrs=attrsNormToString(this._curIconItems[i].attrsNorm);
+    this._curIconItems[i].attrsNorm=styleNormCalc(this._fromIconItems[i].attrsNorm, this._toIconItems[i].attrsNorm, progress);
+    this._curIconItems[i].attrs=styleNormToString(this._curIconItems[i].attrsNorm);
+
+    this._curIconItems[i].styleNorm=styleNormCalc(this._fromIconItems[i].styleNorm, this._toIconItems[i].styleNorm, progress);
+    this._curIconItems[i].style=styleNormToString(this._curIconItems[i].styleNorm);
 
     this._curIconItems[i].trans=transCalc(this._fromIconItems[i].trans, this._toIconItems[i].trans, progress);
     this._curIconItems[i].transStr=trans2string(this._curIconItems[i].trans);
@@ -1359,6 +1404,10 @@ SVGMorpheus.prototype._updateAnimationProgress=function(progress) {
     var attrs=this._curIconItems[i].attrs;
     for(j in attrs) {
       morphNode.node.setAttribute(j,attrs[j]);
+    }
+    var style=this._curIconItems[i].style;
+    for(k in style) {
+      morphNode.node.style[k]=style[k];
     }
     morphNode.node.setAttribute("transform",this._curIconItems[i].transStr);
   }

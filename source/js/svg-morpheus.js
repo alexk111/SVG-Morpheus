@@ -92,7 +92,8 @@ SVGMorpheus.prototype._init=function(){
             var nodeItem=nodeIcon.childNodes[j];
             item={
               path: '',
-              attrs: {}
+              attrs: {},
+              style: {}
             };
 
             // Get Item Path (Convert all shapes into Path Data)
@@ -160,12 +161,30 @@ SVGMorpheus.prototype._init=function(){
                   var name=attrib.name.toLowerCase();
                   switch (name) {
                     case 'fill':
+                    case 'fill-opacity':
+                    case 'opacity':
                     case 'stroke':
+                    case 'stroke-opacity':
                     case 'stroke-width':
                       item.attrs[name]=attrib.value;
                   }
                 }
               }
+
+              // Traverse all inline styles and get supported values
+              for (var l = 0, len4=nodeItem.style.length; l < len4; l++) {
+                var styleName = nodeItem.style[l];
+                switch (styleName) {
+                  case 'fill':
+                  case 'fill-opacity':
+                  case 'opacity':
+                  case 'stroke':
+                  case 'stroke-opacity':
+                  case 'stroke-width':
+                    item.style[styleName]=nodeItem.style[styleName];
+                }
+              }
+
               items.push(item);
             }
           }
@@ -225,6 +244,7 @@ SVGMorpheus.prototype._setupAnimation=function(toIconId) {
           this._fromIconItems.push({
             path: 'M'+toBB.cx+','+toBB.cy+'l0,0',
             attrs: {},
+            style: {},
             trans: {
               'rotate': [0,toBB.cx,toBB.cy]
             }
@@ -233,6 +253,7 @@ SVGMorpheus.prototype._setupAnimation=function(toIconId) {
           this._fromIconItems.push({
             path: 'M0,0l0,0',
             attrs: {},
+            style: {},
             trans: {
               'rotate': [0,0,0]
             }
@@ -245,6 +266,7 @@ SVGMorpheus.prototype._setupAnimation=function(toIconId) {
           this._toIconItems.push({
             path: 'M'+toBB.cx+','+toBB.cy+'l0,0',
             attrs: {},
+            style: {},
             trans: {
               'rotate': [0,toBB.cx,toBB.cy]
             }
@@ -253,6 +275,7 @@ SVGMorpheus.prototype._setupAnimation=function(toIconId) {
           this._toIconItems.push({
             path: 'M0,0l0,0',
             attrs: {},
+            style: {},
             trans: {
               'rotate': [0,0,0]
             }
@@ -283,11 +306,18 @@ SVGMorpheus.prototype._setupAnimation=function(toIconId) {
       toIconItem.curve=curves[1];
 
       // Normalize from/to attrs
-      var attrsNorm=attrsToNorm(this._fromIconItems[i].attrs,this._toIconItems[i].attrs);
+      var attrsNorm=styleToNorm(this._fromIconItems[i].attrs,this._toIconItems[i].attrs);
       fromIconItem.attrsNorm=attrsNorm[0];
       toIconItem.attrsNorm=attrsNorm[1];
-      fromIconItem.attrs=attrsNormToString(fromIconItem.attrsNorm);
-      toIconItem.attrs=attrsNormToString(toIconItem.attrsNorm);
+      fromIconItem.attrs=styleNormToString(fromIconItem.attrsNorm);
+      toIconItem.attrs=styleNormToString(toIconItem.attrsNorm);
+
+      // Normalize from/to style
+      var styleNorm=styleToNorm(this._fromIconItems[i].style,this._toIconItems[i].style);
+      fromIconItem.styleNorm=styleNorm[0];
+      toIconItem.styleNorm=styleNorm[1];
+      fromIconItem.style=styleNormToString(fromIconItem.styleNorm);
+      toIconItem.style=styleNormToString(toIconItem.styleNorm);
 
       // Calculate from/to transform
       toBB=curvePathBBox(toIconItem.curve);
@@ -332,14 +362,17 @@ SVGMorpheus.prototype._setupAnimation=function(toIconId) {
 SVGMorpheus.prototype._updateAnimationProgress=function(progress) {
   progress=easings[this._easing](progress);
 
-  var i, j, len;
+  var i, j, k, len;
   // Update path/attrs/transform
   for(i=0, len=this._curIconItems.length;i<len;i++) {
     this._curIconItems[i].curve=curveCalc(this._fromIconItems[i].curve, this._toIconItems[i].curve, progress);
     this._curIconItems[i].path=path2string(this._curIconItems[i].curve);
 
-    this._curIconItems[i].attrsNorm=attrsNormCalc(this._fromIconItems[i].attrsNorm, this._toIconItems[i].attrsNorm, progress);
-    this._curIconItems[i].attrs=attrsNormToString(this._curIconItems[i].attrsNorm);
+    this._curIconItems[i].attrsNorm=styleNormCalc(this._fromIconItems[i].attrsNorm, this._toIconItems[i].attrsNorm, progress);
+    this._curIconItems[i].attrs=styleNormToString(this._curIconItems[i].attrsNorm);
+
+    this._curIconItems[i].styleNorm=styleNormCalc(this._fromIconItems[i].styleNorm, this._toIconItems[i].styleNorm, progress);
+    this._curIconItems[i].style=styleNormToString(this._curIconItems[i].styleNorm);
 
     this._curIconItems[i].trans=transCalc(this._fromIconItems[i].trans, this._toIconItems[i].trans, progress);
     this._curIconItems[i].transStr=trans2string(this._curIconItems[i].trans);
@@ -352,6 +385,10 @@ SVGMorpheus.prototype._updateAnimationProgress=function(progress) {
     var attrs=this._curIconItems[i].attrs;
     for(j in attrs) {
       morphNode.node.setAttribute(j,attrs[j]);
+    }
+    var style=this._curIconItems[i].style;
+    for(k in style) {
+      morphNode.node.style[k]=style[k];
     }
     morphNode.node.setAttribute("transform",this._curIconItems[i].transStr);
   }
