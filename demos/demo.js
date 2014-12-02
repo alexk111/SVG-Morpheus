@@ -87,11 +87,27 @@ window.onload = function () {
   function getSelValue(sel) {
     return sel.options[sel.selectedIndex].value;
   }
-  selIcon.addEventListener('change', function() {
+
+  var timeoutInstance;
+  function onIconChange() {
+    clearTimeout(timeoutInstance);
     var valIcon=getSelValue(selIcon),
         valEasing=getSelValue(selEasing),
         valDuration=getSelValue(selDuration),
         valRotation=getSelValue(selRotation);
-    svgMorpheus.to(valIcon, {duration: valDuration, easing: valEasing, rotation: valRotation});
-  });
+    svgMorpheus.to(valIcon, {duration: valDuration, easing: valEasing, rotation: valRotation},launchTimer);
+  }
+  function timerTick() {
+    var selIndex=selIcon.selectedIndex;
+    while(selIndex===selIcon.selectedIndex) {
+      selIndex=Math.random()*(selIcon.options.length-1);
+    }
+    selIcon.selectedIndex=selIndex;
+    onIconChange();
+  }
+  function launchTimer() {
+    timeoutInstance=setTimeout(timerTick, 1000);
+  }
+  selIcon.addEventListener('change', onIconChange);
+  launchTimer();
 };
