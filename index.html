@@ -67,7 +67,7 @@
 
     #options {
       margin-top:50px;
-      margin-bottom: 80px;
+      margin-bottom: 40px;
       text-align:center;
     }
 
@@ -93,6 +93,19 @@
       display: inline-block;
       margin:10px;
     }
+
+    #links {
+      margin-bottom: 80px;
+    }
+
+    #links, #links > a {
+      font-family: Arial;
+      font-size: 14px;
+      color: #FFF;
+      text-decoration: none;
+    }
+
+
 
     @media (max-width: 500px) {
       #heading {
@@ -137,6 +150,11 @@
       label, select {
         font-size: 14px;
       }
+
+      #links, #links > a {
+        font-size: 12px;
+      }
+
     }
 
     @media (max-width: 350px) {
@@ -176,7 +194,13 @@
       label, select {
         font-size: 12px;
       }
+
+      #links, #links > a {
+        font-size: 10px;
+      }
+
     }
+
 
   </style>
 </head>
@@ -205,6 +229,9 @@
       <label for="selRotation">Rotation:</label>
       <select id="selRotation"></select>
     </div>
+  </div>
+  <div id="links">
+    Made by <a href="https://twitter.com/alex_kaul" target="_blank">@alex_kaul</a>
   </div>
 
   <script type="text/javascript" src="svg-morpheus.js"></script>
