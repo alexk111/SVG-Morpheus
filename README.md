@@ -8,6 +8,13 @@ JavaScript library enabling SVG icons to morph from one to the other. It impleme
 
 ## Installing
 
+### Using spectrum with a CDN
+
+CDN provided by [cdnjs](https://cdnjs.com/libraries/SVG-Morpheus)
+```
+<script src="//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.1.8/svg-morpheus.js"></script>
+```
+
 ### Download
 
 You have two options to get the library:
