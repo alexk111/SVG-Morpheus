@@ -52,7 +52,8 @@ function SVGMorpheus(element, options, callback) {
     if(progress<1) {
       that._rafid=_reqAnimFrame(that._fnTick);
     } else {
-      that._animationEnd();
+      if (that._toIconId != '')
+        that._animationEnd();
     }
   };
 
