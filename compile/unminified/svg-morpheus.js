@@ -2,10 +2,10 @@
  * SVG Morpheus v0.1.8
  * https://github.com/alexk111/SVG-Morpheus
  *
- * Copyright (c) 2014 Alex Kaul
+ * Copyright (c) 2015 Alex Kaul
  * License: MIT
  *
- * Generated at Tuesday, December 2nd, 2014, 11:12:16 AM
+ * Generated at Thursday, December 31st, 2015, 1:20:29 PM
  */
 var SVGMorpheus=(function() {
 'use strict';
@@ -1458,5 +1458,12 @@ SVGMorpheus.prototype.to=function(iconId, options, callback) {
   }
 };
 
+SVGMorpheus.prototype.registerEasing=function(name, fn) {
+    // Note that this does not prevent overriding easings; this could be a pitfall or a feature,
+    // but we leave it to the developer to be intelligent about how they use this.
+    easings[name] = fn;
+}
+
 return SVGMorpheus;
+
 }());
