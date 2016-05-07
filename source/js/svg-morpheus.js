@@ -210,8 +210,9 @@ SVGMorpheus.prototype._init=function(){
       }
     }
     // To Default Icon
-    if(lastIconId!=='') {
-      this._setupAnimation(lastIconId);
+    var defaultIcon = this._curIconId || lastIconId;
+    if(defaultIcon!=='') {
+      this._setupAnimation(defaultIcon);
       this._updateAnimationProgress(1);
       this._animationEnd();
     }
