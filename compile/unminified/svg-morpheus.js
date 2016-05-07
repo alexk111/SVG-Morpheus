@@ -1,11 +1,11 @@
 /*!
- * SVG Morpheus v0.1.8
+ * SVG Morpheus v0.3.0
  * https://github.com/alexk111/SVG-Morpheus
  *
  * Copyright (c) 2016 Alex Kaul
  * License: MIT
  *
- * Generated at Saturday, May 7th, 2016, 11:42:01 AM
+ * Generated at Saturday, May 7th, 2016, 4:52:57 PM
  */
 var SVGMorpheus=(function() {
 'use strict';
