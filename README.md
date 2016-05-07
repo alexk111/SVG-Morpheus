@@ -45,13 +45,14 @@ myIcons.to('icon1');
 ```
 
 
-## Options
+## Functions
 
 ### SVGMorpheus Constructor
 
+Creates a SVGMorpheus instance.
+
 ```javascript
 var myIcons = new SVGMorpheus(element, options, callback);
-
 ```
 
 **element** - Object/IFrame/SVG element containing an icon set. Can be a DOM element or a CSS query selector.
@@ -71,9 +72,10 @@ var myIcons = new SVGMorpheus(element, options, callback);
 
 ### SVGMorpheus.to()
 
+Morphs the icon to another one.
+
 ```javascript
 myIcons.to(iconId, options, callback);
-
 ```
 
 **iconId** - Id of an icon to transition to.
@@ -88,8 +90,19 @@ myIcons.to(iconId, options, callback);
 
 **callback** - *Optional*. Set a callback function to call at the animation end.
 
+### SVGMorpheus.registerEasing()
 
-## Supported Easings
+Registers a custom easing function. SVGMorpheus has a set of predefined easing functions for the morph animation (goes below). If you want to use your own easing, use this function to do that.
+
+```javascript
+myIcons.registerEasing(name, fn);
+```
+
+**name** - Name of an easing function you want to register.
+
+**fn** - Easing function. ```function easing(timing)``` gets a float ```0<=timing<=1``` argument as an input, and outputs float ```0<=progress<=1```.
+
+## Predefined easing functions
 
 `circ-in`, `circ-out`, `circ-in-out`, `cubic-in`, `cubic-out`, `cubic-in-out`, `elastic-in`, `elastic-out`, `elastic-in-out`, `expo-in`, `expo-out`, `expo-in-out`, `linear`, `quad-in`, `quad-out`, `quad-in-out`, `quart-in`, `quart-out`, `quart-in-out`, `quint-in`, `quint-out`, `quint-in-out`, `sine-in`, `sine-out`, `sine-in-out`
 
@@ -133,4 +146,3 @@ Chrome for Android
 ## License
 
 See the [LICENSE](https://github.com/alexk111/SVG-Morpheus/blob/master/LICENSE) file.
-
