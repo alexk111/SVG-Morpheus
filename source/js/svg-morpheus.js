@@ -53,7 +53,7 @@ function SVGMorpheus(element, options, callback) {
       that._rafid=_reqAnimFrame(that._fnTick);
     } else {
       if (that._toIconId != '') {
-        that._animationEnd();        
+        that._animationEnd();
       }
     }
   };
@@ -442,10 +442,9 @@ SVGMorpheus.prototype.to=function(iconId, options, callback) {
   }
 };
 
+// Register custom Easing function
 SVGMorpheus.prototype.registerEasing=function(name, fn) {
-    // Note that this does not prevent overriding easings; this could be a pitfall or a feature,
-    // but we leave it to the developer to be intelligent about how they use this.
-    easings[name] = fn;
+  easings[name] = fn;
 }
 
 return SVGMorpheus;
