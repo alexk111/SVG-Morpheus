@@ -5,7 +5,7 @@
  * Copyright (c) 2016 Alex Kaul
  * License: MIT
  *
- * Generated at Saturday, May 7th, 2016, 1:38:16 PM
+ * Generated at Saturday, May 7th, 2016, 11:42:01 AM
  */
 var SVGMorpheus=(function() {
 'use strict';
@@ -1074,7 +1074,7 @@ function SVGMorpheus(element, options, callback) {
       that._rafid=_reqAnimFrame(that._fnTick);
     } else {
       if (that._toIconId != '') {
-        that._animationEnd();        
+        that._animationEnd();
       }
     }
   };
@@ -1461,10 +1461,9 @@ SVGMorpheus.prototype.to=function(iconId, options, callback) {
   }
 };
 
+// Register custom Easing function
 SVGMorpheus.prototype.registerEasing=function(name, fn) {
-    // Note that this does not prevent overriding easings; this could be a pitfall or a feature,
-    // but we leave it to the developer to be intelligent about how they use this.
-    easings[name] = fn;
+  easings[name] = fn;
 }
 
 return SVGMorpheus;
