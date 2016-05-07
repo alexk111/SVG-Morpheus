@@ -5,7 +5,7 @@
  * Copyright (c) 2016 Alex Kaul
  * License: MIT
  *
- * Generated at Saturday, May 7th, 2016, 12:13:13 PM
+ * Generated at Saturday, May 7th, 2016, 1:38:16 PM
  */
 var SVGMorpheus=(function() {
 'use strict';
@@ -1073,7 +1073,9 @@ function SVGMorpheus(element, options, callback) {
     if(progress<1) {
       that._rafid=_reqAnimFrame(that._fnTick);
     } else {
-      that._animationEnd();
+      if (that._toIconId != '') {
+        that._animationEnd();        
+      }
     }
   };
 
@@ -1458,6 +1460,12 @@ SVGMorpheus.prototype.to=function(iconId, options, callback) {
     this._rafid=_reqAnimFrame(this._fnTick);
   }
 };
+
+SVGMorpheus.prototype.registerEasing=function(name, fn) {
+    // Note that this does not prevent overriding easings; this could be a pitfall or a feature,
+    // but we leave it to the developer to be intelligent about how they use this.
+    easings[name] = fn;
+}
 
 return SVGMorpheus;
 
