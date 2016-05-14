@@ -6,6 +6,7 @@
   "name": "svg-morpheus",
   "prettyName": "SVG Morpheus",
   "version": "0.3.1",
+  "main": "compile/minified/svg-morpheus.js",
   "description": "JavaScript library enabling SVG icons to morph from one to the other. It implements Material Design's Delightful Details transitions.",
   "homepage": "https://github.com/alexk111/SVG-Morpheus",
   "repository": {
