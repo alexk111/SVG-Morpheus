@@ -76,7 +76,7 @@ gulp.task('scripts', function(){
       }
     }))
     .pipe(concat.header(Config.banners.unminified + '\n' +
-                        'var SVGMorpheus=(function() {\n\'use strict\';\n\n'))
+                        '(function() {\n\'use strict\';\n\n'))
     .pipe(concat.footer('\n}());'))
     .pipe(gulp.dest(Config.paths.compileUnminified.js));
 });
