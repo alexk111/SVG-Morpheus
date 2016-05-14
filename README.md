@@ -12,12 +12,12 @@ JavaScript library enabling SVG icons to morph from one to the other. It impleme
 
 CDN provided by [cdnjs](https://cdnjs.com/libraries/SVG-Morpheus)
 ```
-<script src="//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.3.1/svg-morpheus.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.3.2/svg-morpheus.js"></script>
 ```
 
 ### Download
 
-You have two options to get the library:
+You have the following options to install the library:
 - [Download SVG Morpheus](https://github.com/alexk111/SVG-Morpheus/archive/master.zip) from GitHub.
 - Use NPM `npm install svg-morpheus`.
 - Use Bower `bower install svg-morpheus`.
