@@ -1,13 +1,13 @@
 /*!
- * SVG Morpheus v0.3.0
+ * SVG Morpheus v0.3.1
  * https://github.com/alexk111/SVG-Morpheus
  *
  * Copyright (c) 2016 Alex Kaul
  * License: MIT
  *
- * Generated at Saturday, May 7th, 2016, 4:52:57 PM
+ * Generated at Saturday, May 14th, 2016, 4:08:20 PM
  */
-var SVGMorpheus=(function() {
+(function() {
 'use strict';
 
 /*
@@ -1466,6 +1466,14 @@ SVGMorpheus.prototype.registerEasing=function(name, fn) {
   easings[name] = fn;
 }
 
-return SVGMorpheus;
+if (typeof define === 'function' && define.amd) {
+  define(function () {
+    return SVGMorpheus
+  })
+} else if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+  module.exports = SVGMorpheus
+} else {
+  window.SVGMorpheus = SVGMorpheus
+}
 
 }());
