@@ -1,5 +1,11 @@
 # SVG Morpheus
 
+## WARNING
+
+THIS PROJECT IS NOT MAINTAINED ANYMORE. You are free to fork it and start a new project.
+
+## Overview
+
 JavaScript library enabling SVG icons to morph from one to the other. It implements Material Design's [Delightful Details](http://www.google.com/design/spec/animation/delightful-details.html) transitions.
 
 ## Live demo
