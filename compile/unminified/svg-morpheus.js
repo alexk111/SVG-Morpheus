@@ -1,11 +1,11 @@
 /*!
- * SVG Morpheus v0.3.2
- * https://github.com/alexk111/SVG-Morpheus
+ * SVG Morpheus v0.4
+ * https://github.com/papablack/SVG-Morpheus
  *
- * Copyright (c) 2017 Alex Kaul
+ * Copyright (c) 2017 Papa Black
  * License: MIT
  *
- * Generated at Friday, July 21st, 2017, 10:26:05 AM
+ * Generated at Friday, July 21st, 2017, 2:49:30 PM
  */
 (function() {
 'use strict';
@@ -1532,7 +1532,9 @@ SVGMorpheus.prototype.handleScroll = function (theShape, options) {
         options = {};
     }
 
-    $.extend(this.scrollOptions, options);
+    for (opt in options) {
+        SVGMorpheus.prototype.scrollOptions[opt] = options[opt];
+    }
 
     var currentScroll = window.scrollY;
     var calculatedProgress = (currentScroll) / ($(document).height() - $(window).height());
@@ -1541,7 +1543,6 @@ SVGMorpheus.prototype.handleScroll = function (theShape, options) {
         return;
     }
 
-    //console.log(calculatedProgress);
     this.progressTo(theShape, calculatedProgress);
     this.scrollSave('mainScroll', currentScroll);
 };

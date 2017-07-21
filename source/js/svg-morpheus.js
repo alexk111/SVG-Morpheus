@@ -513,7 +513,9 @@ SVGMorpheus.prototype.handleScroll = function (theShape, options) {
         options = {};
     }
 
-    $.extend(this.scrollOptions, options);
+    for (opt in options) {
+        SVGMorpheus.prototype.scrollOptions[opt] = options[opt];
+    }
 
     var currentScroll = window.scrollY;
     var calculatedProgress = (currentScroll) / ($(document).height() - $(window).height());
@@ -522,7 +524,6 @@ SVGMorpheus.prototype.handleScroll = function (theShape, options) {
         return;
     }
 
-    //console.log(calculatedProgress);
     this.progressTo(theShape, calculatedProgress);
     this.scrollSave('mainScroll', currentScroll);
 };

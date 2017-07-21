@@ -1,17 +1,17 @@
 {
   "author": {
-    "name": "Alex Kaul",
-    "email": "alexkaul@googlemail.com"
+    "name": "Papa Black",
+    "email": "jakpawlik@gmai.com"
   },
   "name": "svg-morpheus",
   "prettyName": "SVG Morpheus",
-  "version": "0.3.2",
+  "version": "0.4",
   "main": "compile/minified/svg-morpheus.js",
   "description": "JavaScript library enabling SVG icons to morph from one to the other. It implements Material Design's Delightful Details transitions.",
-  "homepage": "https://github.com/alexk111/SVG-Morpheus",
+  "homepage": "https://github.com/papablack/SVG-Morpheus",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexk111/SVG-Morpheus.git"
+    "url": "https://github.com/papablack/SVG-Morpheus.git"
   },
   "license": "MIT",
   "dependencies": {},
