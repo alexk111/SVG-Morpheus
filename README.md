@@ -1,6 +1,6 @@
 # SVG Morpheus
 
-##New maintenance
+## New maintenance
 
 This fork will focus on usage of SVG Morpheus for live-action SVG animations based on scroll.
 

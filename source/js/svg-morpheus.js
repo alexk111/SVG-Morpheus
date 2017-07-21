@@ -505,17 +505,26 @@ SVGMorpheus.prototype.setupAnimationBase = function (stepId) {
     $this._updateAnimationProgress(0);
 }
 
-SVGMorpheus.prototype.handleScroll = function (theShape) {
+SVGMorpheus.prototype.scrollOptions = {}
+
+SVGMorpheus.prototype.handleScroll = function (theShape, options) {
+
+    if (typeof options == 'undefined') {
+        options = {};
+    }
+
+    $.extend(this.scrollOptions, options);
+
     var currentScroll = window.scrollY;
     var calculatedProgress = (currentScroll) / ($(document).height() - $(window).height());
 
     if (calculatedProgress > 1) {
         return;
     }
-    
+
     //console.log(calculatedProgress);
-    myIcons.progressTo(theShape, calculatedProgress);
-    myIcons.scrollSave('mainScroll', currentScroll);
+    this.progressTo(theShape, calculatedProgress);
+    this.scrollSave('mainScroll', currentScroll);
 };
 
 SVGMorpheus.prototype.__scrollSave = {};
