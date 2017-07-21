@@ -1,12 +1,14 @@
 # SVG Morpheus
 
-## WARNING
+## New maintenance
 
-THIS PROJECT IS NOT MAINTAINED ANYMORE. You are free to fork it and start a new project.
+This fork will focus on usage of SVG Morpheus for live-action SVG animations based on scroll.
 
 ## Overview
 
 JavaScript library enabling SVG icons to morph from one to the other. It implements Material Design's [Delightful Details](http://www.google.com/design/spec/animation/delightful-details.html) transitions.
+
+forked from: http://alexk111.github.io/SVG-Morpheus/
 
 ## Live demo
 
@@ -14,17 +16,10 @@ JavaScript library enabling SVG icons to morph from one to the other. It impleme
 
 ## Installing
 
-### Using SVG Morpheus with a CDN
-
-CDN provided by [cdnjs](https://cdnjs.com/libraries/SVG-Morpheus)
-```
-<script src="//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.3.2/svg-morpheus.js"></script>
-```
-
 ### Download
 
 You have the following options to install the library:
-- [Download SVG Morpheus](https://github.com/alexk111/SVG-Morpheus/archive/master.zip) from GitHub.
+- [Download SVG Morpheus](https://github.com/papablack/SVG-Morpheus/archive/master.zip) from GitHub.
 - Use NPM `npm install svg-morpheus`.
 - Use Bower `bower install svg-morpheus`.
 
@@ -33,7 +28,7 @@ You have the following options to install the library:
 Simply add the svg-morpheus.js script to your website/application. No other scripts are needed. Both the minified and uncompressed (for development) versions are in the /compile folder.
 
 ```html
-<script src="svg-morpheus.js"></script>
+<script src="./compile/minified/svg-morpheus.js"></script>
 ```
 
 ## Usage
@@ -152,4 +147,4 @@ Chrome for Android
 
 ## License
 
-See the [LICENSE](https://github.com/alexk111/SVG-Morpheus/blob/master/LICENSE) file.
+See the [LICENSE](https://github.com/papablack/SVG-Morpheus/blob/master/LICENSE) file.
